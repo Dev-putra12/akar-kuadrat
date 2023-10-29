@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register & Login Page</title>
+    <title>Login Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -26,13 +26,6 @@
                                     <label for="nim" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Masukan
                                         Nim</label>
                                 </div>
-                                <!-- {{-- <div class="relative">
-                                    <input autocomplete="off" id="password" name="password" type="password"
-                                        class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                                        placeholder="Password" />
-                                    <label for="password"
-                                        class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Password</label>
-                                </div> --}} -->
                                 <div class="relative">
                                     <button class="bg-violet-500 text-white rounded-md px-2 py-1">Submit</button>
                                 </div>
