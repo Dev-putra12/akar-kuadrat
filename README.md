@@ -8,7 +8,7 @@
 
 - 👨‍💻 All of my projects are available at [hi-kode.com](hi-kode.com)
 
-- 🔭 My portfolio are available at [putra-dev.my.id](putra-dev.my.id)
+- 🔭 My portfolio are available at [putra-dev.my.id](https://putra-dev.my.id/)
 
 - 💬 Ask me about **lua,laravel,php, etc**
 
