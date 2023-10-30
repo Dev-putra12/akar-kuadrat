@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 29, 2023 at 06:42 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: localhost:3306
+-- Generation Time: Oct 31, 2023 at 04:12 AM
+-- Server version: 10.6.15-MariaDB-cll-lve
+-- PHP Version: 8.1.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,8 +18,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `akar-kuadrat`
+-- Database: `hiko3370_akar_kuadrat`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -35,14 +43,6 @@ CREATE TABLE `squareroot` (
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `squareroot`
---
-
-INSERT INTO `squareroot` (`id`, `nim`, `input_number`, `result`, `created_at`, `updated_at`) VALUES
-(1, 2105551044, 49, 7, '2023-10-30 01:40:15', '2023-10-30 01:40:15'),
-(2, 2105551044, 48, 6, '2023-10-30 01:40:15', '2023-10-30 01:40:15');
 
 -- --------------------------------------------------------
 
@@ -91,7 +91,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `squareroot`
 --
 ALTER TABLE `squareroot`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -107,7 +107,7 @@ ALTER TABLE `user`
 -- Constraints for table `squareroot`
 --
 ALTER TABLE `squareroot`
-  ADD CONSTRAINT `squareroot_ibfk_1` FOREIGN KEY (`nim`) REFERENCES `user` (`Nim`);
+  ADD CONSTRAINT `squareroot_ibfk_1` FOREIGN KEY (`nim`) REFERENCES `user` (`nim`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
