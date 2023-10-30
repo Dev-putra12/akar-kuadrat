@@ -10,15 +10,15 @@ if (!isset($_SESSION['nim'])) {
 
 // PDO (PHP Data Object) initialization 
 $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "akar-kuadrat";
+$username = "hiko3370_root";
+$password = "Blackcnz1@";
+$dbname = "hiko3370_akar_kuadrat";
 
 try {
     $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     // Set the PDO error mode to exception
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected successfully";
+    // echo "Connected successfully";
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
 }
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-var_dump('nilai n :', $n);
+//var_dump('nilai n :', $n);
 // var_dump('nilai nim :', $nim);
 // menampilkan hasil dalam format JSON
 // header('Content-type: application/json');
@@ -55,6 +55,27 @@ var_dump('nilai n :', $n);
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        function submitForm() {
+            var nim = "<?php echo $_SESSION['nim']; ?>";
+            var nilai = document.getElementById("nilai").value;
+
+            // Perform AJAX request
+            $.ajax({
+                url: 'pl-sql-api.php',
+                method: 'POST',
+                data: {
+                    nim: nim,
+                    nilai: nilai
+                },
+                success: function(response) {
+                    console.log("Response from server:", response);
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error:", error);
+                }
+            });
+        }
+
         function hanyaAngka(event) {
             var angka = event.which || event.keyCode;
             if ((angka < 48 || angka > 57) && angka !== 46) {
@@ -71,7 +92,7 @@ var_dump('nilai n :', $n);
             var request = new XMLHttpRequest();
 
             // Mengatur tipe permintaan dan URL endpoint API
-            request.open("POST", "akar-kuadrat-api.php", true);
+            request.open("POST", "hi-kode.com/akar-kuadrat-api.php", true);
             request.setRequestHeader("Content-type", "application/json");
 
             // Mengirimkan data nilai ke API
@@ -93,14 +114,24 @@ var_dump('nilai n :', $n);
 
         function hitungSql() {
             // Dapatkan nilai dari input pengguna dengan id "nilai"
-            var nilai = $('#nilai').val();
+            var nilai = parseFloat($('#nilai').val()); // Mengubah nilai menjadi tipe float
 
-            // Kirim permintaan AJAX ke endpoint API
+            // Dapatkan nilai nim dari sesi
+            var nim = '<?php echo $_SESSION['nim']; ?>'; // Ganti dengan cara yang sesuai untuk mengambil nim dari sesi
+
+            // Pastikan nilai yang diperoleh valid
+            if (isNaN(nilai)) {
+                console.log("Nilai tidak valid");
+                return;
+            }
+
+            // Kirim permintaan AJAX ke endpoint API dengan menggunakan objek data
             $.ajax({
-                url: 'hi-kode.com/index.php', // Ubah URL ini ke endpoint API Anda
+                url: '/pl-sql-api.php', // Ubah URL ini ke endpoint API Anda
                 type: 'POST',
                 data: {
-                    'nilai': nilai
+                    'nilai': nilai,
+                    'nim': nim // Tambahkan nim ke objek data yang dikirimkan
                 },
                 success: function(response) {
                     // Tangani hasil respons dari endpoint API di sini
@@ -112,7 +143,11 @@ var_dump('nilai n :', $n);
                 }
             });
         }
-        // document.querySelector('#hitungSqlButton').addEventListener('click', hitungSql);
+
+        function submitAndCalculate() {
+            submitForm(); // Call the submitForm function
+            hitungSql(); // Call the hitungSql function
+        }
     </script>
 </head>
 
@@ -132,7 +167,7 @@ var_dump('nilai n :', $n);
                     <input id="nilai" name="nilai" onkeypress="return hanyaAngka(event)" min="0.1" step="0.1" placeholder="Hanya Masukan Angka" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
                 </div>
                 <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="hitungAkar()">Hitung Akar Kuadrat</button>
-                <button type="button" class="mb-10 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="hitungSql()">Hitung PL/SQL</button>
+                <button type="submit" class="mb-10 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="submitAndCalculate()">Hitung PL/SQL</button>
             </form>
             <!-- end form -->
 
